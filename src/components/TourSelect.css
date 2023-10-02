@@ -1,0 +1,38 @@
+.for-me{
+  background: #fff;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: blue;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all ease .3s;
+  border: 1px solid blue;
+
+}
+
+.for-me:hover{
+  background-color: #fff;
+  color: #b83290;
+}
+
+.for-others{
+  background: #fff;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: blue;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all ease .3s;
+  border: 1px solid blue;
+}
+
+.for-others:hover{
+  background-color: #fff;
+  color: #b83290;
+}
+
+.active{
+  background-color: #b83290;
+  color: #fff;
+  border: 1px solid #b83290;
+}

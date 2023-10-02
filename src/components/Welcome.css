@@ -1,0 +1,14 @@
+.intro-welcome{
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .welcome-page{
+    border-radius: 20px;
+  }
+}

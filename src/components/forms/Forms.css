@@ -1,0 +1,23 @@
+.forms-page{
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+.forms-page h1{
+  font-size: 22px;
+  font-weight: 600;
+  margin: 30px 0;
+  color: #b7328f;
+}
+
+.forms-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .responsive-field{
+    width: 100% !important;
+  }
+}

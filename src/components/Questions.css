@@ -1,0 +1,27 @@
+.questionsPage{
+  width: 100%;
+  height: 100%;
+}
+
+.questionsHeading{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.questionsPageContainer{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.questionsButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 30px;
+}

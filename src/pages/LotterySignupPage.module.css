@@ -1,0 +1,33 @@
+.lotteryBox {
+  width: 100%;
+}
+
+.tableSignup {
+  width: 100%;
+  padding: 0 40px;
+}
+
+.tableSignup th {
+  text-align: center;
+  border-bottom: 1px solid #999999;
+  padding: 10px 0;
+}
+
+.tableSignup td {
+  text-align: center;
+  border-bottom: 1px solid #999999;
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .tableSignup {
+    padding: 0;
+  }
+
+  .tableSignup th {
+    font-size: 12px;
+  }
+  .tableSignup td {
+    font-size: 12px;
+  }
+}
