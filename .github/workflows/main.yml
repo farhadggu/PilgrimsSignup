@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      
+      - name: setup git config
+        run: |
+          git config user.name "farhadggu"
+          git config user.email "farhadggu@gmail.com"
+
+      - name: Clean Cache NPM
+        run: npm cache clean --force
+      
+      - name: Dependecies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+        
+      - name: Save version
+        id: version
+        run: echo ::set-output name=tag::$(echo $(node -p -e "require('./package.json').version"))
+        
+      - name: Increase version
+        run: npm version patch
+        
+      - name: Push new version
+        run: git push
+      
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag farhadggu79/tut:${{steps.version.outputs.tag}}
+        
+      - name: Push to Docker Hub
+        run: docker push farhadggu79/tut:${{steps.version.outputs.tag}}
