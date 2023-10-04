@@ -82,7 +82,7 @@ export default function Questions({
   if (canSignUp) {
     return (
       <div className="questionsPage">
-        <h3 className="questionsHeading">به سوال زیر پاسخ دهید</h3>
+        <h3 className="questionsHeading">برای شرکت در قرعه کشی باید به سوال زیر پاسخ صحیح بدهید.</h3>
         <div className="questionsPageContainer">
           {loadingPage ? (
             <>
@@ -90,7 +90,7 @@ export default function Questions({
             </>
           ) : (
             <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">
+              <FormLabel sx={{ marginBottom: "20px" }} id="demo-radio-buttons-group-label">
                 {question.question}
               </FormLabel>
               <RadioGroup
@@ -99,6 +99,7 @@ export default function Questions({
                 name="radio-buttons-group"
                 row
                 onChange={(e) => setAnswer(e.target.value)}
+                className="choicesRadio"
               >
                 <FormControlLabel
                   value="answer_1"

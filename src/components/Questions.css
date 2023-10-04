@@ -1,27 +1,50 @@
-.questionsPage{
+.questionsPage {
   width: 100%;
   height: 100%;
 }
 
-.questionsHeading{
+.questionsHeading {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-.questionsPageContainer{
+.questionsPageContainer {
   margin-top: 20px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.questionsButton{
+.questionsButton {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 20px;
   gap: 30px;
+}
+
+.choicesRadio {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100% !important;
+}
+
+.choicesRadio label {
+  display: flex !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .choicesRadio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
 }

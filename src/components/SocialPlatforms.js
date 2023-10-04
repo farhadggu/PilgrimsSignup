@@ -46,14 +46,14 @@ export default function SocialPlatforms({
   };
 
   const names = [
-    { name: "ایتا", img: "karbala-gift/social/eitaa.png", value: "eitaa" },
-    { name: "بله", img: "karbala-gift/social/bale.png", value: "bale" },
-    { name: "روبیکا", img: "karbala-gift/social/rubika.png", value: "rubika" },
-    { name: "سروش", img: "karbala-gift/social/sorush.jpg", value: "sorosh" },
-    { name: "آی گپ", img: "karbala-gift/social/Igap.png", value: "igap" },
-    { name: "اینستاگرام", img: "karbala-gift/social/insta.png", value: "instagram" },
-    { name: "تلگرام", img: "karbala-gift/social/telegram.jpg", value: "telegram" },
-    { name: "واتساپ", img: "karbala-gift/social/whatsapp.jpg", value: "whatsapp" },
+    { name: "ایتا", img: "social/eitaa.png", value: "eitaa" },
+    { name: "بله", img: "social/bale.png", value: "bale" },
+    { name: "روبیکا", img: "social/rubika.png", value: "rubika" },
+    { name: "سروش", img: "social/sorush.jpg", value: "sorosh" },
+    { name: "آی گپ", img: "social/Igap.png", value: "igap" },
+    { name: "اینستاگرام", img: "social/insta.png", value: "instagram" },
+    { name: "تلگرام", img: "social/telegram.jpg", value: "telegram" },
+    { name: "واتساپ", img: "social/whatsapp.jpg", value: "whatsapp" },
   ];
 
   console.log(personName);
@@ -116,7 +116,7 @@ export default function SocialPlatforms({
       </div>
       <div className={styles.platformFields}>
         <div>
-          <p>در چه شبکه های اجتماعی هایی حضور دارید؟</p>
+          <p>در کدام شبکه های اجتماعی حضور دارید؟</p>
           <FormControl
             fullWidth
             sx={{
@@ -165,7 +165,7 @@ export default function SocialPlatforms({
         </div>
 
         <div>
-          <p>از کدام شبکه اجتماعی آمدید؟</p>
+          <p>از کدام شبکه اجتماعی با ما آشنا شدید؟</p>
           <FormControl
             fullWidth
             sx={{

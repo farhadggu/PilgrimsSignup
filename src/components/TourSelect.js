@@ -36,10 +36,10 @@ export default function TourSelect({
 }) {
   // const [tour, setTour] = useState("");
   const [openInfo, setOpenInfo] = useState(false);
-  console.log("phone", data.phone)
+  console.log("phone", data.phone);
   const handleChangeTour = (event) => {
-    console.log(event.target.value)
-    setData({...data, tor_name: event.target.value});
+    console.log(event.target.value);
+    setData({ ...data, tor_name: event.target.value });
   };
 
   return (
@@ -66,25 +66,28 @@ export default function TourSelect({
         alignItems="flex-start"
         width="100%"
       >
-        <FormControl sx={{ width: "200px", "& .MuiInputBase-input": {
-                  color: "#000",
-                },
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "#b83290",
-                  },
-                },
-                "& .MuiOutlinedInput-root": {
-                  fieldset: {
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#b83290",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
-                  },
-                },
-              }}>
+        <FormControl
+          sx={{
+            width: "200px",
+            "& .MuiInputBase-input": {
+              color: "#000",
+            },
+            "& .MuiInputLabel-root": {
+              "&.Mui-focused": {
+                color: "#b83290",
+              },
+            },
+            "& .MuiOutlinedInput-root": {
+              fieldset: {},
+              "&:hover fieldset": {
+                borderColor: "#b83290",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#b83290",
+              },
+            },
+          }}
+        >
           <InputLabel id="demo-simple-select-label">انتخاب مقصد</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -111,6 +114,12 @@ export default function TourSelect({
                 با توجه به اینکه کاروان کربلا در حال حاضر از مبدا تهران و کرج
                 برگزار می شود توجه داشته باشید برای عزیمت به عتبات و عالیات باید
                 امکان رفت و برگشت شخصی خود را به این شهرها باشید
+              </Typography>
+            </li>
+
+            <li>
+              <Typography textAlign="justify" mt={4} fontSize={18}>
+                شما می توانید هر هفته در قرعه کشی کربلا نهال گشت شرکت کنید.
               </Typography>
             </li>
 

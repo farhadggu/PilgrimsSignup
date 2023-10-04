@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function LotterySignupPage({ token }) {
   const [signups, setSignups] = useState([]);
+  const [allSignups, setAllSignups] = useState([]);
 
   const getUsersSignups = async () => {
     await axios({
@@ -13,7 +14,6 @@ export default function LotterySignupPage({ token }) {
       method: "get",
       data: null,
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGZjM2IwNzhkNWFmZTgxYWM5MWMzNjgiLCJuYW1lIjoi2YHYsdmH2KfYryDZgtix2Kfar9mI2LLZhNmIIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjk0MjUxNzg0fQ.RCRuk7HDaGdEU1_7FXYYQc-8SeyMlZG3vEIPhkOhi50`,
         "Content-Type": "application/json",
         Accept: "application/json",
       },
@@ -30,6 +30,29 @@ export default function LotterySignupPage({ token }) {
     getUsersSignups();
   }, []);
 
+  const getAllUsersSignups = async () => {
+    await axios({
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/lottery-players-all`,
+      method: "get",
+      data: null,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((resp) => {
+        setAllSignups(resp.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getUsersSignups();
+    getAllUsersSignups()
+  }, []);
+
   return (
     <Container maxWidth="lg" className="home-box">
       <img src={karbala} alt="karbala" />
@@ -40,7 +63,7 @@ export default function LotterySignupPage({ token }) {
               sx={{ fontWeight: "700", margin: "10px 0 30px" }}
               fontSize={20}
             >
-              لیست ثبت نامی ها
+              لیست شرکت کننده هایی که پاسخ صحیح داده اند ({signups.length})
             </Typography>
             <table className={styles.tableSignup}>
               <tr>
@@ -63,7 +86,40 @@ export default function LotterySignupPage({ token }) {
                   <td>
                     {item.phone.substring(8) +
                       "***" +
-                      item.phone.substring(0, 6)}
+                      item.phone.substring(0, 4)}
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </Box>
+
+          <Box md={12} className={styles.lotteryBox}>
+            <Typography
+              sx={{ fontWeight: "700", margin: "10px 0 30px" }}
+              fontSize={20}
+            >
+              لیست تمامی شرکت کننده ها
+            </Typography>
+            <table className={styles.tableSignup}>
+              <tr>
+                <th>ردیف</th>
+                <th>نام و نام خانوادگی</th>
+                <th>تعداد ثبت نامی</th>
+                <th>شماره تماس</th>
+              </tr>
+              {allSignups.map((item, i) => (
+                <tr>
+                  <td>{i + 1}</td>
+                  <td>
+                    {item.name} {item.lastname}
+                  </td>
+                  <td>
+                    {item.register_count}
+                  </td>
+                  <td>
+                    {item.phone.substring(8) +
+                      "***" +
+                      item.phone.substring(0, 4)}
                   </td>
                 </tr>
               ))}

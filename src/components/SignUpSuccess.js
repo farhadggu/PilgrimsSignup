@@ -1,30 +1,38 @@
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import success from "../images/checked.png";
-import styles from "./SignUpSuccess.module.css"
+import styles from "./SignUpSuccess.module.css";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-export default function SignUpSuccess({token}) {
-  const [email, setEmail] = useState("")
+export default function SignUpSuccess({ token }) {
+  const [email, setEmail] = useState("");
 
   const handleEmail = async () => {
-    await axios.post(`${process.env.REACT_APP_BASEURL}/api/v1/update-profile`, {
-      email: email,
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      }
-    }).then((resp) => {
-      console.log(resp)
-      toast.success("ایمیل شما ثبت شد.")
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+    await axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/api/v1/update-profile`,
+        {
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((resp) => {
+        console.log(resp);
+        toast.success("ایمیل شما ثبت شد.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Box padding="20px">
@@ -42,24 +50,47 @@ export default function SignUpSuccess({token}) {
         ثبت نام شما با موفقیت انجام شد
       </Typography>
       <div className={styles.socialLists}>
-        <Typography>برای آگاهی از اخبار قرعه کشی صفحات ما را در شبکه های اجتماعی دنبال کنید.</Typography>
-        <div className={styles.socialIcons}>
+        {/* <Link to="/karbala-signups">مشاهده ثبت نام کننده های قرعه کشی</Link> */}
+        <Typography>
+          برای آگاهی از اخبار قرعه کشی صفحات ما را در شبکه های اجتماعی دنبال
+          کنید.
+        </Typography>
+        <div className={styles.socialIcons} style={{ marginTop: "20px" }}>
           <a href="https://ble.ir/Nahalgasht">
-            <img style={{ width: "40px", height: "40px" }} src="karbala-gift/social/bale.png" alt="icons" />
+            <img
+              style={{ width: "40px", height: "40px" }}
+              src="social/bale.png"
+              alt="icons"
+            />
           </a>
           <a href="https://eitaa.com/nahalgasht">
-            <img style={{ width: "40px", height: "40px" }} src="karbala-gift/social/eitaa.png" alt="icons" />
+            <img
+              style={{ width: "40px", height: "40px" }}
+              src="social/eitaa.png"
+              alt="icons"
+            />
           </a>
           <a href="https://www.instagram.com/nahalgasht.ziarati/">
-            <img style={{ width: "40px", height: "40px" }} src="karbala-gift/social/insta.png" alt="icons" />
+            <img
+              style={{ width: "40px", height: "40px" }}
+              src="social/insta.png"
+              alt="icons"
+            />
           </a>
           <a href="https://telegram.me/s/nahalgasht?before=9424">
-            <img style={{ width: "40px", height: "40px" }} src="karbala-gift/social/telegram.jpg" alt="icons" />
+            <img
+              style={{ width: "40px", height: "40px" }}
+              src="social/telegram.jpg"
+              alt="icons"
+            />
           </a>
         </div>
       </div>
       <div className={styles.emailBox}>
-        <p>همین طور اگر مایل هستید لیست شرکت کنندگان قرعه کشی برای شما ارسال شود ایمیل خود را وارد کنید</p>
+        <p>
+          همین طور اگر مایل هستید لیست شرکت کنندگان قرعه کشی برای شما ارسال شود
+          ایمیل خود را وارد کنید
+        </p>
         <TextField
           onChange={(e) => setEmail(e.target.value)}
           sx={{
@@ -74,8 +105,7 @@ export default function SignUpSuccess({token}) {
               },
             },
             "& .MuiOutlinedInput-root": {
-              fieldset: {
-              },
+              fieldset: {},
               "&:hover fieldset": {
                 borderColor: "#b83290",
               },
@@ -83,7 +113,13 @@ export default function SignUpSuccess({token}) {
                 borderColor: "#b83290",
               },
             },
-          }} fullWidth type="email" id="standard-basic" label="ایمیل شما" variant="standard" />
+          }}
+          fullWidth
+          type="email"
+          id="standard-basic"
+          label="ایمیل شما"
+          variant="standard"
+        />
         <button onClick={handleEmail} className={styles.submitButton}>
           ثبت ایمیل
         </button>

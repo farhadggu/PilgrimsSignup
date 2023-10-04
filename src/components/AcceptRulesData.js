@@ -91,9 +91,12 @@ export default function AcceptRulesData({
     setTimeout(() => {
       updateOrInsert
         ? axios
-            .put(
-              `${process.env.REACT_APP_BASEURL}/api/v1/toor/${idUpdate}`,
-              data,
+            .post(
+              `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
+              {
+                question_id: question.id,
+                answer: question.final_answer === answer ? 1 : 0,
+              },
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -103,17 +106,11 @@ export default function AcceptRulesData({
               }
             )
             .then(async (resp) => {
-              toast.success(resp.data.message);
-              setIsLoading(false);
-              setActive((prev) => prev + 1);
-              setActiveStep((prev) => prev + 1);
+              setDisableAnswer(true);
               await axios
-                .post(
-                  `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
-                  {
-                    question_id: question.id,
-                    answer: question.final_answer === answer ? 1 : 0,
-                  },
+                .put(
+                  `${process.env.REACT_APP_BASEURL}/api/v1/toor/${idUpdate}`,
+                  data,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -122,62 +119,67 @@ export default function AcceptRulesData({
                     },
                   }
                 )
-                .then((resp) => {
+                .then(async (resp) => {
+                  toast.success(resp.data.message);
                   setLoading(false);
                   setIsLoading(false);
-                  setDisableAnswer(true);
+                  setActive((prev) => prev + 1);
+                  setActiveStep((prev) => prev + 1);
                 })
                 .catch((error) => {
-                  console.log(error);
+                  setLoading(false);
                   setIsLoading(false);
+                  console.log(error);
+                  toast.error(error.response.data.message);
                 });
             })
             .catch((error) => {
-              setIsLoading(false);
               console.log(error);
-              toast.error(error.response.data.message);
+              setLoading(false);
+              setIsLoading(false);
             })
         : axios
-            .post(`${process.env.REACT_APP_BASEURL}/api/v1/toor`, data, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-                Accept: "application/json",
+            .post(
+              `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
+              {
+                question_id: question.id,
+                answer: question.final_answer === answer ? 1 : 0,
               },
-            })
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+              }
+            )
             .then(async (resp) => {
-              toast.success(resp.data.message);
-              setActive((prev) => prev + 1);
-              setActiveStep((prev) => prev + 1);
+              setDisableAnswer(true);
               await axios
-                .post(
-                  `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
-                  {
-                    question_id: question.id,
-                    answer: question.final_answer === answer ? 1 : 0,
+                .post(`${process.env.REACT_APP_BASEURL}/api/v1/toor`, data, {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
                   },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                      Accept: "application/json",
-                    },
-                  }
-                )
-                .then((resp) => {
+                })
+                .then(async (resp) => {
+                  toast.success(resp.data.message);
+                  setActive((prev) => prev + 1);
+                  setActiveStep((prev) => prev + 1);
                   setLoading(false);
                   setIsLoading(false);
-                  setDisableAnswer(true);
                 })
                 .catch((error) => {
-                  console.log(error);
+                  setLoading(false);
                   setIsLoading(false);
+                  console.log(error);
+                  toast.error(error.response.data.message);
                 });
             })
             .catch((error) => {
-              setIsLoading(false);
               console.log(error);
-              toast.error(error.response.data.message);
+              setIsLoading(false);
             });
     }, 1000);
   };
@@ -193,7 +195,7 @@ export default function AcceptRulesData({
           <li>
             <Typography textAlign="justify">
               در صورتی که باتوجه به تحقیقات به عمل آمده محرز شود هرکدام از شرکت
-              کنندگان با اطلاعات غلط و غیر واقعی ثبت نام نمونده اند از روند
+              کنندگان با اطلاعات غلط و غیر واقعی ثبت نام نموده اند از روند
               قرعه‌کشی حذف خواهند شد و اگر از برندگان قرعه کشی باشند جایگزین
               آنها در هفته ی بعد قرعه کشی خواهد شد .
             </Typography>
