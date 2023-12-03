@@ -1,0 +1,56 @@
+.emailBox {
+  margin-top: 20px;
+}
+
+.emailBox input {
+  width: 100%;
+}
+
+.socialLists {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  transition: all ease .3s;
+}
+
+.socialIcons img:hover{
+  scale: 1.1;
+  transition: all ease .3s;
+}
+
+.submitButton {
+  background-color: #b83290 !important;
+  color: #fff;
+  border: 1px solid #b83290;
+  margin-top: 15px;
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.submitButton:hover {
+  background-color: #fff !important;
+  color: #b83290;
+  border: 1px solid #b83290;
+  cursor: pointer;
+}
+
+@media (max-width:500px) {
+  .signupSuccessBtn {
+    flex-direction: column;
+  }
+}

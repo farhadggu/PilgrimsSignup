@@ -1,0 +1,55 @@
+.socialPage {
+  width: 100%;
+}
+
+.headerSocialPage {
+  margin-bottom: 20px;
+}
+
+.platformFields {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.platformFields > div {
+  grid-column: span 6 / span 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+}
+
+.platformFields  div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.submitButton {
+  background-color: #b83290 !important;
+  color: #fff;
+  border: 1px solid #b83290;
+  margin-top: 15px;
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.submitButton:hover {
+  background-color: #fff !important;
+  color: #b83290;
+  border: 1px solid #b83290;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .platformFields div {
+    grid-column: span 12 / span 12;
+  }
+}
