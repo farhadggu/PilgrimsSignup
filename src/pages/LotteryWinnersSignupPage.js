@@ -82,6 +82,25 @@ export default function LotteryWinnersSignupPage() {
     }
   };
 
+  const handleSearchRow = (word) => {
+    console.log(word)
+    if (word.trim() === "") {
+      // If the search word is empty or only c
+      setSignups(filteredAllSignups);
+    } else {
+      const searchWords = word.trim().split(" "); // Split the input by spaces
+      let filter = filteredAllSignups.filter((item) =>
+        searchWords.every((searchWord) => {
+          return (
+            item.number_of_row === Number(searchWord)
+          );
+
+        })
+      );
+      setSignups(filter);
+    }
+  }
+
   const ITEMS_PER_PAGE = 12;
   const MAX_PAGE_BUTTONS = 3;
 
@@ -181,7 +200,7 @@ export default function LotteryWinnersSignupPage() {
               </Box>
             ) : (
               <>
-                <Box  className={styles.winnersHeader}>
+                <Box className={styles.winnersHeader}>
                   <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
                     <div
                       style={{
@@ -193,7 +212,7 @@ export default function LotteryWinnersSignupPage() {
                         borderRadius: "8px",
                         cursor: "pointer",
                       }}
-                      onClick={() => {handlePilgrims({ value: true }); setActive(1)}}
+                      onClick={() => { handlePilgrims({ value: true }); setActive(1) }}
                     >
                       5 سال اخیر رفتند
                     </div>
@@ -207,10 +226,27 @@ export default function LotteryWinnersSignupPage() {
                         borderRadius: "8px",
                         cursor: "pointer",
                       }}
-                      onClick={() => {handlePilgrims({ value: false }); setActive(2)}}
+                      onClick={() => { handlePilgrims({ value: false }); setActive(2) }}
                     >
                       5 سال اخیر نرفتند
                     </div>
+                  </Box>
+
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <input
+                      style={{
+                        width: "320px",
+                        outline: "none",
+                        border: "none",
+                        borderBottom: "1px solid #ccc",
+                        fontSize: "16px",
+                        padding: "5px 10px",
+                      }}
+                      onChange={(e) => handleSearchRow(e.target.value)}
+                      type="text"
+                      placeholder="ردیف"
+                    />
+                    <SearchIcon sx={{ marginLeft: "-30px", fontSize: "18px" }} />
                   </Box>
 
                   <Box sx={{ display: "flex", alignItems: "center" }}>
