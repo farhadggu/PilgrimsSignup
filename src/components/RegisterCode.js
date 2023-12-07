@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "../utils/services";
 import "./RegisterPhone.css";
+import Timer from "../utils/Timer";
 
 export default function RegisterCode({
   data,
@@ -37,7 +38,7 @@ export default function RegisterCode({
     await axios
       .post(
         `${process.env.REACT_APP_BASEURL}/api/v1/login`,
-        { phone: data.phone, otp: p2e(code) },
+        { phone: p2e(data.phone), otp: p2e(code) },
         {
           headers: {
             "Content-Type": "application/json",
@@ -92,8 +93,6 @@ export default function RegisterCode({
       });
   };
 
-  useEffect(() => { }, []);
-
   return (
     <Box className="phone-card">
       <Box
@@ -141,6 +140,7 @@ export default function RegisterCode({
           },
         }}
       />
+      <Timer phone={data.phone} />
       <Box m={2} width="100%" display="flex" justifyContent="space-around">
         <Button
           onClick={handleCodeRegister}

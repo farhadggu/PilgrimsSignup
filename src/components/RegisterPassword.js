@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import Timer from "../utils/Timer";
 
 export default function RegisterPassword({
   error,
@@ -49,7 +50,7 @@ export default function RegisterPassword({
         .post(
           `${process.env.REACT_APP_BASEURL}/api/v1/login`,
           {
-            phone: phone,
+            phone: p2e(phone),
             password: p2e(password),
           },
           {
@@ -158,7 +159,7 @@ export default function RegisterPassword({
       .post(
         `${process.env.REACT_APP_BASEURL}/api/v1/forgot-password`,
         {
-          phone: phone,
+          phone: p2e(phone),
         },
         {
           headers: {
@@ -183,8 +184,8 @@ export default function RegisterPassword({
       .post(
         `${process.env.REACT_APP_BASEURL}/api/v1/forgot-password`,
         {
-          phone: phone,
-          otp: otp,
+          phone: p2e(phone),
+          otp: p2e(otp),
         },
         {
           headers: {
@@ -279,8 +280,12 @@ export default function RegisterPassword({
               },
             },
           }}
+          inputProps={{
+            inputMode: "numeric",
+          }}
         />
-        <Box m={2} width="100%" display="flex" justifyContent="space-around">
+        <Timer forget={phone} />
+        <Box m={2} mt={0} width="100%" display="flex" justifyContent="space-around">
           <Button
             onClick={handleForgotOtpPassword}
             disabled={error.hasError || !otp || loading}
@@ -348,6 +353,9 @@ export default function RegisterPassword({
               </InputAdornment>
             }
             label="رمز عبور"
+            inputProps={{
+              inputMode: "numeric",
+            }}
           />
         </FormControl>
         <p
@@ -370,7 +378,7 @@ export default function RegisterPassword({
           </Button>
           <Button
             className="back-btn"
-            onClick={() => setActive((prev) => prev - 1)}
+            onClick={() => setActive((prev) => prev - 2)}
           >
             بازگشت
           </Button>

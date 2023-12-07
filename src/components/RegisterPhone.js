@@ -40,8 +40,12 @@ export default function RegisterPhone({
         if (error.response.data.message.includes("password")) {
           setPasswordStep("password")
           setActive((prev) => prev + 2)
+        } else if (error.response.data.message.includes("Repeated")) {
+          toast.error("کد اعتبار سنجی قبلا برای شما ارسال شده دقایقی دیگر تست کنید");
+          setActive((prev) => prev + 1)
+        } else {
+          toast.error(error.response.data.message);
         }
-        // toast.error(error.response.data.message);
       });
   };
 
