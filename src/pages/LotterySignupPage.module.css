@@ -1,3 +1,12 @@
+.filterBoxRow {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
 .lotteryBox {
   width: 100%;
 }
@@ -47,6 +56,16 @@
   .winnersHeader {
     display: flex;
     flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .filterBoxRow {
+    display: flex;
+    flex-direction: column !important;
     gap: 30px;
     align-items: center;
     justify-content: space-between;

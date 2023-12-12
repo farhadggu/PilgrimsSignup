@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Container, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./LotterySignupPage.module.css";
@@ -9,9 +9,21 @@ export default function LotteryWinnersSignupPage() {
   const [signups, setSignups] = useState([]);
   const [lotteryDay, setLotteryDay] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [allSignups, setAllSignups] = useState([]);
   const [filteredAllSignups, setFilteredAllSignups] = useState([]);
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
+  const [province, setProvince] = useState([]);
+  const [personName, setPersonName] = React.useState([]);
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
 
   const getUsersSignups = async () => {
     setLoading(true);
@@ -53,7 +65,25 @@ export default function LotteryWinnersSignupPage() {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
+
+  useEffect(() => {
+    axios({
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/province`,
+      method: "get",
+      data: null,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((resp) => {
+        setProvince(resp.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleSearch = (word) => {
     setCurrentPage(1);
@@ -67,18 +97,36 @@ export default function LotteryWinnersSignupPage() {
         searchWords.every((searchWord) => {
           if (/^989\d{9}$|^09\d{9}$|^9\d{9}$/.test(searchWord)) {
             // If the search word matches the Persian phone number format, search in numbers
-            console.log(searchWord)
+            console.log(searchWord);
             return (
               item.phone.startsWith(searchWord) ||
               item.number_of_row === Number(searchWord)
             );
           } else {
             // Otherwise, search in full_name
-            return item.full_name.trim().toLowerCase().includes(searchWord.toLowerCase());
+            return item.full_name
+              .trim()
+              .toLowerCase()
+              .includes(searchWord.toLowerCase());
           }
         })
       );
       setSignups(filter);
+    }
+  };
+
+  const handleChange = async (event) => {
+    let { value } = event.target;
+    console.log(value)
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+    if (value === "هیچی" || value.length === 0) {
+      setSignups(filteredAllSignups)
+    } else {
+      const foundProvince = province.find(item => item.province_name_fa === value);
+      if (foundProvince) {
+        console.log(foundProvince.id)
+        setSignups(filteredAllSignups.filter((item) => foundProvince.id === item.province_id))
+      }
     }
   };
 
@@ -200,8 +248,8 @@ export default function LotteryWinnersSignupPage() {
               </Box>
             ) : (
               <>
-                <Box className={styles.winnersHeader}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
+                <Box className={styles.winnersHeader} sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start !important", alignItems: "center !important", width: "100%" }}>
+                  <Box sx={{ display: "flex", justifyContent: "flex-start", width: "100%", alignItems: "center", gap: "20px" }}>
                     <div
                       style={{
                         fontSize: "16px !important",
@@ -232,39 +280,63 @@ export default function LotteryWinnersSignupPage() {
                     </div>
                   </Box>
 
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <input
-                      style={{
-                        width: "320px",
-                        outline: "none",
-                        border: "none",
-                        borderBottom: "1px solid #ccc",
-                        fontSize: "16px",
-                        padding: "5px 10px",
-                      }}
-                      onChange={(e) => handleSearchRow(e.target.value)}
-                      type="text"
-                      placeholder="ردیف"
-                    />
-                    <SearchIcon sx={{ marginLeft: "-30px", fontSize: "18px" }} />
-                  </Box>
+                  <div className={styles.filterBoxRow}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <InputLabel id="demo-multiple-checkbox-label">استان</InputLabel>
+                      <Select
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
+                        value={personName}
+                        onChange={handleChange}
+                        input={<OutlinedInput label="استان" />}
+                        renderValue={(selected) => selected.join(", ")}
+                        MenuProps={MenuProps}
+                      >
+                        <MenuItem key="none" value="هیچکدام">
+                          <ListItemText primary="هیچکدام" />
+                        </MenuItem>
+                        {province.map((name) => (
+                          <MenuItem key={name.id} value={name.province_name_fa}>
+                            <ListItemText primary={name.province_name_fa} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <input
-                      style={{
-                        width: "320px",
-                        outline: "none",
-                        border: "none",
-                        borderBottom: "1px solid #ccc",
-                        fontSize: "16px",
-                        padding: "5px 10px",
-                      }}
-                      onChange={(e) => handleSearch(e.target.value)}
-                      type="text"
-                      placeholder="نام و نام خانوادگی / شماره تماس ...0912"
-                    />
-                    <SearchIcon sx={{ marginLeft: "-30px", fontSize: "18px" }} />
-                  </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+                      <input
+                        style={{
+                          outline: "none",
+                          border: "none",
+                          borderBottom: "1px solid #ccc",
+                          fontSize: "16px",
+                          padding: "5px 10px",
+                          width: "100%"
+                        }}
+                        onChange={(e) => handleSearchRow(e.target.value)}
+                        type="text"
+                        placeholder="ردیف"
+                      />
+                      <SearchIcon sx={{ marginLeft: "-30px", fontSize: "18px" }} />
+                    </Box>
+
+                    <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+                      <input
+                        style={{
+                          outline: "none",
+                          border: "none",
+                          borderBottom: "1px solid #ccc",
+                          fontSize: "16px",
+                          padding: "5px 10px",
+                          width: "100%"
+                        }}
+                        onChange={(e) => handleSearch(e.target.value)}
+                        type="text"
+                        placeholder="نام و نام خانوادگی / شماره تماس ...0912"
+                      />
+                      <SearchIcon sx={{ marginLeft: "-30px", fontSize: "18px" }} />
+                    </Box>
+                  </div>
                 </Box>
 
                 <Box md={12} className={styles.lotteryBox}>
@@ -276,6 +348,7 @@ export default function LotteryWinnersSignupPage() {
                       <th>ردیف</th>
                       {/* <th>شناسه</th> */}
                       <th>نام و نام خانوادگی</th>
+                      <th>استان</th>
                       <th>شماره تماس</th>
                     </tr>
                     {getCurrentPageData().map((item, i) => (
@@ -283,6 +356,7 @@ export default function LotteryWinnersSignupPage() {
                         <td>{item.number_of_row}</td>
                         {/* <td>{item.lottery_number}</td> */}
                         <td>{item.full_name}</td>
+                        <td>{province?.find((it) => it.id == item.province_id).province_name_fa}</td>
                         <td>{item.phone.substring(8) + "***" + item.phone.substring(0, 4)}</td>
                       </tr>
                     ))}
