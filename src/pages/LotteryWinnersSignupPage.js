@@ -24,7 +24,7 @@ export default function LotteryWinnersSignupPage() {
       },
     },
   };
-
+  console.log()
   const getUsersSignups = async () => {
     setLoading(true);
     await axios({
@@ -37,29 +37,36 @@ export default function LotteryWinnersSignupPage() {
       },
     })
       .then(async (resp) => {
-        setLotteryDay(true);
-        await axios({
-          url: `${process.env.REACT_APP_BASEURL}/api/v1/lottery-players`,
-          method: "get",
-          data: null,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        })
-          .then((resp) => {
-            setSignups(resp.data.data);
-            setLoading(false);
-            setFilteredAllSignups(resp.data.data);
+        if (resp.data.data.day === `${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDay()}`) {
+          setLotteryDay(true);
+          await axios({
+            url: `${process.env.REACT_APP_BASEURL}/api/v1/lottery-players`,
+            method: "get",
+            data: null,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
           })
-          .catch((error) => {
-            console.log(error);
-          });
+            .then((resp) => {
+              setSignups(resp.data.data);
+              setLoading(false);
+              setFilteredAllSignups(resp.data.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          setLotteryDay(false);
+          setLoading(false);
+
+        }
+
         // if (parseInt(resp.data.data.day.slice(-2), 10) === new Date().getDate()) {
 
         // } else {
-        //   setLotteryDay(false);
-        //   setLoading(false);
+        // setLotteryDay(false);
+        // setLoading(false);
         // }
       })
       .catch((error) => {
@@ -244,7 +251,7 @@ export default function LotteryWinnersSignupPage() {
           <Box className="welcome-page">
             {!lotteryDay ? (
               <Box md={12} sx={{ height: "100px" }} className={styles.lotteryBox}>
-                <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>صفحه مورد نظر یافت نشد!</h3>
+                <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>روز قرعه کشی مراجه نمایید!</h3>
               </Box>
             ) : (
               <>
