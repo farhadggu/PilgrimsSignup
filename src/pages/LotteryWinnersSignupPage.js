@@ -37,7 +37,8 @@ export default function LotteryWinnersSignupPage() {
       },
     })
       .then(async (resp) => {
-        if (resp.data.data.day === `${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDay()}`) {
+        console.log()
+        if (resp.data.data.day.slice(6) === `${new Date().getDate()}`) {
           setLotteryDay(true);
           await axios({
             url: `${process.env.REACT_APP_BASEURL}/api/v1/lottery-players`,
@@ -251,7 +252,7 @@ export default function LotteryWinnersSignupPage() {
           <Box className="welcome-page">
             {!lotteryDay ? (
               <Box md={12} sx={{ height: "100px" }} className={styles.lotteryBox}>
-                <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>روز قرعه کشی مراجه نمایید!</h3>
+                <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>روز قرعه کشی مراجعه نمایید!</h3>
               </Box>
             ) : (
               <>
