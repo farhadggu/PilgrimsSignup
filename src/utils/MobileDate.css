@@ -1,0 +1,104 @@
+.muirtl-hz1bth-MuiDialog-container {
+  /* transform: translate3d(0px, 45%, 0px) !important; */
+  /* height: 100% !important; */
+  transition: all ease 0.3s;
+}
+
+.dialogBox {
+  height: 100% !important;
+  transform: translate3d(0px, 0px, 0px) !important;
+}
+
+.listStyle {
+  position: relative;
+  width: 100px;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff !important;
+}
+
+.listStyle li {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.listStyle::-webkit-scrollbar {
+  width: 0;
+}
+
+.listStyle::-webkit-scrollbar-thumb {
+  background: #aeaeafa1;
+  border-radius: 0;
+}
+
+.listStyle:before {
+  content: "";
+  height: 80px;
+  top: 0;
+  width: 100%;
+  display: block;
+  top: 0;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
+.listStyle:after {
+  content: "";
+  height: 80px;
+  top: 0;
+  width: 100%;
+  display: block;
+  bottom: 0;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.border-top-active {
+  content: "";
+  top: 39%;
+  width: 100%;
+  bottom: 0;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  border-top: 1px solid #8c8c8c;
+}
+
+.border-bottom-active {
+  content: "";
+  height: 30px;
+  top: 36%;
+  width: 100%;
+  bottom: 0;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  border-bottom: 1px solid #8c8c8c;
+}
+
+.year-text {
+  height: 30px;
+  scroll-snap-align: start;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif !important;
+}
+
+.day-text {
+  height: 30px;
+  scroll-snap-align: start;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif !important;
+}

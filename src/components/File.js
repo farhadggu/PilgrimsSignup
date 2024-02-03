@@ -85,13 +85,13 @@ export default function File({
       </Typography>
       <Box display="flex" gap="10px">
         <Button
-          sx={{color: "#b83290 !important", backgroundColor: "#fff !important"}}
+          sx={{color: "#054A27 !important", backgroundColor: "#fff !important"}}
           onClick={() => inputRef.current.click()}
         >
           بارگذاری مدارک
         </Button>
         <Button
-          sx={{color: "#b83290 !important", backgroundColor: "#fff !important"}}
+          sx={{color: "#054A27 !important", backgroundColor: "#fff !important"}}
           onClick={downloadHandler}
         >
           نمونه معرفی نامه

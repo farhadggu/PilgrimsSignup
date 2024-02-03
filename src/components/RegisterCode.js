@@ -21,10 +21,10 @@ export default function RegisterCode({
   setIdUpdate,
   setCanSignUp,
   setPasswordStep,
-  setSocial
+  setSocial,
 }) {
   const [code, setCode] = useState("");
-  const p2e = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+  const p2e = (s) => s.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
 
   const handleChangeCode = (e) => {
     setCode(e.target.value);
@@ -48,12 +48,12 @@ export default function RegisterCode({
       )
       .then((resp) => {
         if (!resp.data.data.password) {
-          setPasswordStep(true)
+          setPasswordStep(true);
         }
         if (resp.data.data.canRegister) {
-          setCanSignUp(true)
+          setCanSignUp(true);
         } else {
-          setCanSignUp(false)
+          setCanSignUp(false);
         }
         setLoading(false);
         // toast.success(resp.data.message);
@@ -63,7 +63,7 @@ export default function RegisterCode({
         if (resp.data.data.tor.phone) {
           setUpdateOrInsert(true);
           setIdUpdate(resp.data.data.tor.id);
-          setSocial(resp.data.data.social)
+          setSocial(resp.data.data.social);
           setData({
             phone: resp.data.data.tor?.phone,
             name: resp.data.data.tor?.name,
@@ -75,12 +75,11 @@ export default function RegisterCode({
             city_id: resp.data.data.tor?.city_id,
             village: resp.data.data.tor?.village,
             preparation_for_travel: resp.data.data.tor?.preparation_for_travel,
-            travel_preparation_time:
-              resp.data.data.tor?.travel_preparation_time,
+            travel_preparation_time: resp.data.data.tor?.travel_preparation_time,
             description: resp.data.data.tor?.description,
             files_url: resp.data.data.tor?.files_url,
             origin_location: resp.data.data.tor?.origin_location,
-            pilgrims: resp.data.data.tor?.pilgrims
+            pilgrims: resp.data.data.tor?.pilgrims,
           });
         } else {
           setUpdateOrInsert(false);
@@ -120,38 +119,32 @@ export default function RegisterCode({
         className="input-phone"
         helperText={`${error.hasError ? error.error : ""}`}
         sx={{
-          width: "100%", "& .MuiInputBase-input": {
+          width: "100%",
+          "& .MuiInputBase-input": {
             color: "#000",
           },
           "& .MuiInputLabel-root": {
             "&.Mui-focused": {
-              color: "#b83290",
+              color: "#054A27",
             },
           },
           "& .MuiOutlinedInput-root": {
-            fieldset: {
-            },
+            fieldset: {},
             "&:hover fieldset": {
-              borderColor: "#b83290",
+              borderColor: "#054A27",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#b83290",
+              borderColor: "#054A27",
             },
           },
         }}
       />
       <Timer phone={data.phone} />
       <Box m={2} width="100%" display="flex" justifyContent="space-around">
-        <Button
-          onClick={handleCodeRegister}
-          disabled={error.hasError || !code || loading}
-        >
+        <Button onClick={handleCodeRegister} disabled={error.hasError || !code || loading}>
           {loading ? "صبر کنید..." : "تایید"}
         </Button>
-        <Button
-          className="back-btn"
-          onClick={() => setActive((prev) => prev - 1)}
-        >
+        <Button className="back-btn" onClick={() => setActive((prev) => prev - 1)}>
           بازگشت
         </Button>
       </Box>

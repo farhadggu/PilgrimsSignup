@@ -89,7 +89,7 @@ export default function Questions({
               <div className="content" style={{ width: "100%" }}></div>
             </>
           ) : (
-            <FormControl>
+            <FormControl sx={{ "& .MuiButtonBase-root span": {color: "#054a27 !important"}, "& label": {color: "#054a27 !important"} }}>
               <FormLabel sx={{ marginBottom: "20px" }} id="demo-radio-buttons-group-label">
                 {question.question}
               </FormLabel>
@@ -131,7 +131,7 @@ export default function Questions({
         </div>
         <div className="questionsButton">
           <button
-            style={{ cursor: "pointer", background: loading && "#b83290" }}
+            style={{ cursor: "pointer", background: loading && "#054A27" }}
             onClick={() => handleAnswer()}
             disabled={answer.length === 0 || disableAnswer}
           >

@@ -262,9 +262,9 @@ export default function LotteryWinnersSignupPage() {
                       style={{
                         fontSize: "16px !important",
                         padding: "5px",
-                        backgroundColor: `${active === 1 ? "#fff" : "#b83290"}`,
-                        color: `${active === 1 ? "#b83290" : "#fff"}`,
-                        border: "1px solid #b83290",
+                        backgroundColor: `${active === 1 ? "#fff" : "#054A27"}`,
+                        color: `${active === 1 ? "#054A27" : "#fff"}`,
+                        border: "1px solid #054A27",
                         borderRadius: "8px",
                         cursor: "pointer",
                       }}
@@ -276,9 +276,9 @@ export default function LotteryWinnersSignupPage() {
                       style={{
                         fontSize: "16px !important",
                         padding: "5px",
-                        backgroundColor: `${active === 2 ? "#fff" : "#b83290"}`,
-                        color: `${active === 2 ? "#b83290" : "#fff"}`,
-                        border: "1px solid #b83290",
+                        backgroundColor: `${active === 2 ? "#fff" : "#054A27"}`,
+                        color: `${active === 2 ? "#054A27" : "#fff"}`,
+                        border: "1px solid #054A27",
                         borderRadius: "8px",
                         cursor: "pointer",
                       }}

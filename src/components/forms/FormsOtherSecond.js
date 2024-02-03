@@ -452,7 +452,7 @@ export default function FormsOtherSecond({
           }}
           variant="contained"
           sx={{
-            background: "#b83290",
+            background: "#054A27",
             padding: "10px 30px",
             margin: "20px auto",
           }}
@@ -481,7 +481,7 @@ export default function FormsOtherSecond({
           }}
           variant="contained"
           sx={{
-            background: "#b83290",
+            background: "#054A27",
             padding: "10px 30px 0 10px",
             margin: "20px auto",
           }}

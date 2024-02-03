@@ -31,9 +31,9 @@
 }
 
 .submitButton {
-  background-color: #b83290 !important;
+  background-color: #054A27 !important;
   color: #fff;
-  border: 1px solid #b83290;
+  border: 1px solid #054A27;
   margin-top: 15px;
   font-size: 14px !important;
   display: flex;
@@ -44,8 +44,8 @@
 
 .submitButton:hover {
   background-color: #fff !important;
-  color: #b83290;
-  border: 1px solid #b83290;
+  color: #054A27;
+  border: 1px solid #054A27;
   cursor: pointer;
 }
 

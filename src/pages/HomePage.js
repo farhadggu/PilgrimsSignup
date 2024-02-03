@@ -46,6 +46,7 @@ export default function HomePage() {
   const [data, setData] = useState({
     phone: "",
     name: "",
+    birthday: "",
     lastname: "",
     gender: "",
     national_code: "",
@@ -75,18 +76,6 @@ export default function HomePage() {
     const { name, value } = e.target;
     setError(validateInput({ name, value }));
     setData({ ...data, [name]: value });
-
-    // if (name === "phone") {
-    //   // Remove all non-digit characters
-    //   const cleanValue = value.replace(/\D/g, "");
-
-    //   if (!/^0[0-9]{11,11}$/.test(cleanValue)) {
-    //     setData({ ...data, [name]: cleanValue });
-    //   } else {
-    //     return;
-    //   }
-    // } else {
-    // }
   };
 
   useEffect(() => {
@@ -155,9 +144,7 @@ export default function HomePage() {
       setPasswordStep={setPasswordStep}
       setSocial={setSocial}
     />,
-    (passwordStep ||
-      passwordStep === "passowrd" ||
-      passwordStep === "pass") && (
+    (passwordStep || passwordStep === "passowrd" || passwordStep === "pass") && (
       <RegisterPassword
         active={active}
         setActive={setActive}
@@ -294,9 +281,7 @@ export default function HomePage() {
       },
     })
       .then((resp) => {
-        if (
-          parseInt(resp.data.data.day.slice(-2), 10) === new Date().getDate()
-        ) {
+        if (parseInt(resp.data.data.day.slice(-2), 10) === new Date().getDate()) {
           setLotteryDay(true);
         } else {
           setLotteryDay(false);
@@ -319,8 +304,7 @@ export default function HomePage() {
         {lotteryDay ? (
           <div className="welcome-page">
             <h4 style={{ textAlign: "center" }}>
-              در حال حاضر امکان ثبت نام وجود ندارد لطفا در روز ها آتی مراجعه
-              نمایید .
+              در حال حاضر امکان ثبت نام وجود ندارد لطفا در روز ها آتی مراجعه نمایید .
             </h4>
           </div>
         ) : loadingLottery ? (
@@ -330,9 +314,7 @@ export default function HomePage() {
         ) : (
           <>
             <Box className="welcome-page-stepper">
-              {active > 0 && (
-                <StepperForm activeStep={activeStep} toggle={toggle} />
-              )}
+              {active > 0 && <StepperForm activeStep={activeStep} toggle={toggle} />}
             </Box>
             <Box className="welcome-page">{componentLists[active]}</Box>
           </>

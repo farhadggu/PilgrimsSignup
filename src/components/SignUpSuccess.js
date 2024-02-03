@@ -101,16 +101,16 @@ export default function SignUpSuccess({ token }) {
             },
             "& .MuiInputLabel-root": {
               "&.Mui-focused": {
-                color: "#b83290",
+                color: "#054A27",
               },
             },
             "& .MuiOutlinedInput-root": {
               fieldset: {},
               "&:hover fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
             },
           }}
@@ -136,7 +136,7 @@ export default function SignUpSuccess({ token }) {
           component="a"
           href="https://nahalgasht.com/tours/iraq/karbala/air/"
           sx={{
-            background: "#b83290",
+            background: "#054A27",
             color: "#fff",
             padding: "10px 20px",
             borderRadius: "10px",
@@ -150,7 +150,7 @@ export default function SignUpSuccess({ token }) {
           component="a"
           href="https://nahalgasht.com/"
           sx={{
-            background: "#b83290",
+            background: "#054A27",
             color: "#fff",
             padding: "10px 20px",
             borderRadius: "10px",

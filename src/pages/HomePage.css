@@ -41,17 +41,17 @@
 .welcome-page button{
   font-size: 18px;
   padding: 10px 25px;
-  background-color: #b83290;
+  background-color: #054A27;
   border-radius: 10px;
-  border: 1px solid #b83290;
+  border: 1px solid #054A27;
   color: #fff;
   transition: all ease .3;
 }
 
 .welcome-page button:hover{
   background-color: #fff;
-  color: #b83290 !important;
-  border: 1px solid #b83290;
+  color: #054A27 !important;
+  border: 1px solid #054A27;
 }
 
 .home-box img{

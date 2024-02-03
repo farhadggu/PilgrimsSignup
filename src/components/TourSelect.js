@@ -46,16 +46,16 @@ export default function TourSelect({
             },
             "& .MuiInputLabel-root": {
               "&.Mui-focused": {
-                color: "#b83290",
+                color: "#054A27",
               },
             },
             "& .MuiOutlinedInput-root": {
               fieldset: {},
               "&:hover fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
             },
           }}
@@ -89,13 +89,13 @@ export default function TourSelect({
 
             <li>
               <Typography textAlign="justify" mt={4} fontSize={18}>
-                شما می توانید هر هفته در قرعه کشی کربلای نهال گشت شرکت کنید.
+                شما می توانید هر هفته در قرعه کشی کربلای گروه زیارتی آمنین شرکت کنید.
               </Typography>
             </li>
 
             <li>
               <Typography textAlign="justify" mt={4} fontSize={18}>
-                تمام اطلاعات و سوالات مربوط به قرعه‌کشی و اعزام شرکت کنندگان عزیز در کانال رسمی نهال گشت در فضای مجازی بارگزاری شده است شما
+                تمام اطلاعات و سوالات مربوط به قرعه‌کشی و اعزام شرکت کنندگان عزیز در کانال رسمی گروه زیارتی آمنین در فضای مجازی بارگزاری شده است شما
                 با سرچ هشتگ <span style={{ color: "#943993" }}>#قرعه_کشی_کربلا</span> میتوانید اطلاعات کاملی در رابطه با این طرح به دست
                 بیاورید .
               </Typography>
@@ -103,7 +103,7 @@ export default function TourSelect({
 
             <li>
               <Typography textAlign="justify" mt={4} fontSize={18}>
-                توجه داشته باشید مجری رسمی این طرح فقط شرکت نهال گشت ایرانیان است، پس مراقب سوء استفاده های ممکن در قرعه‌کشی ها و طرح هایی
+                توجه داشته باشید مجری رسمی این طرح فقط شرکت گروه زیارتی آمنین ایرانیان است، پس مراقب سوء استفاده های ممکن در قرعه‌کشی ها و طرح هایی
                 با این نام و مزمون باشید.
               </Typography>
             </li>

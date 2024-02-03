@@ -190,7 +190,7 @@ export default function AcceptRulesData({
     <>
       <Box p={3}>
         <Typography fontSize={18} fontWeight="600" mb={2}>
-          تایید اطلاعات وارد شده به معنای پذیرش قوانین و مقررات نهال گشت است.
+          تایید اطلاعات وارد شده به معنای پذیرش قوانین و مقررات گروه زیارتی آمنین است.
         </Typography>
 
         <ul style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -238,7 +238,7 @@ export default function AcceptRulesData({
             <DialogTitle
               sx={{
                 borderBottom: "1px solid #ccc",
-                color: "#b83290",
+                color: "#054A27",
                 fontSize: "18px",
               }}
             >
@@ -319,7 +319,7 @@ export default function AcceptRulesData({
           sx={{
             borderTop: "1px solid #ccc",
             borderBottom: "1px solid #ccc",
-            color: "#b83290",
+            color: "#054A27",
             fontSize: "18px",
           }}
         >
@@ -378,7 +378,7 @@ export default function AcceptRulesData({
                 alignItems="center"
                 gap="10px"
               >
-                <Typography fontWeight="700">نسبت نفرات همراه:</Typography>
+                {/* <Typography fontWeight="700">نسبت نفرات همراه:</Typography> */}
                 <Typography>{data.passengers_relationship}</Typography>
               </Grid>
             )}
@@ -533,7 +533,7 @@ export default function AcceptRulesData({
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              sx={{ color: "#b83290" }}
+              sx={{ color: "#054A27" }}
             >
               تایید نهایی
             </Button>
@@ -546,7 +546,7 @@ export default function AcceptRulesData({
               setActiveStep((prev) => prev - 1);
               setData({ ...data, other: false });
             }}
-            sx={{ color: "#b83290" }}
+            sx={{ color: "#054A27" }}
           >
             ویرایش اطلاعات
           </Button>

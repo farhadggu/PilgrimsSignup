@@ -41,7 +41,7 @@ export default function RegisterPassword({
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(0);
   const [showPassword, setShowPassword] = React.useState(false);
-  const p2e = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+  const p2e = (s) => s.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
 
   const handlePasswordRegister = async () => {
     setLoading(true);
@@ -83,10 +83,8 @@ export default function RegisterPassword({
                 province_id: resp.data.data.tor?.province_id,
                 city_id: resp.data.data.tor?.city_id,
                 village: resp.data.data.tor?.village,
-                preparation_for_travel:
-                  resp.data.data.tor?.preparation_for_travel,
-                travel_preparation_time:
-                  resp.data.data.tor?.travel_preparation_time,
+                preparation_for_travel: resp.data.data.tor?.preparation_for_travel,
+                travel_preparation_time: resp.data.data.tor?.travel_preparation_time,
                 description: resp.data.data.tor?.description,
                 files_url: resp.data.data.tor?.files_url,
                 origin_location: resp.data.data.tor?.origin_location,
@@ -208,10 +206,8 @@ export default function RegisterPassword({
               province_id: resp.data.data.tor?.province_id,
               city_id: resp.data.data.tor?.city_id,
               village: resp.data.data.tor?.village,
-              preparation_for_travel:
-                resp.data.data.tor?.preparation_for_travel,
-              travel_preparation_time:
-                resp.data.data.tor?.travel_preparation_time,
+              preparation_for_travel: resp.data.data.tor?.preparation_for_travel,
+              travel_preparation_time: resp.data.data.tor?.travel_preparation_time,
               description: resp.data.data.tor?.description,
               files_url: resp.data.data.tor?.files_url,
               origin_location: resp.data.data.tor?.origin_location,
@@ -267,16 +263,16 @@ export default function RegisterPassword({
             },
             "& .MuiInputLabel-root": {
               "&.Mui-focused": {
-                color: "#b83290",
+                color: "#054A27",
               },
             },
             "& .MuiOutlinedInput-root": {
               fieldset: {},
               "&:hover fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#b83290",
+                borderColor: "#054A27",
               },
             },
           }}
@@ -286,16 +282,10 @@ export default function RegisterPassword({
         />
         <Timer forget={phone} />
         <Box m={2} mt={0} width="100%" display="flex" justifyContent="space-around">
-          <Button
-            onClick={handleForgotOtpPassword}
-            disabled={error.hasError || !otp || loading}
-          >
+          <Button onClick={handleForgotOtpPassword} disabled={error.hasError || !otp || loading}>
             {loading ? "صبر کنید..." : "تایید"}
           </Button>
-          <Button
-            className="back-btn"
-            onClick={() => setActive((prev) => prev - 1)}
-          >
+          <Button className="back-btn" onClick={() => setActive((prev) => prev - 1)}>
             بازگشت
           </Button>
         </Box>
@@ -320,8 +310,24 @@ export default function RegisterPassword({
               : "برای حساب کاربری خود رمز عبور جدید وارد کنید"}
           </Typography>
         </Box>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+        <FormControl
+          sx={{
+            m: 1,
+            width: "25ch",
+            ".muirtl-1sdnp8e-MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
+              color: "#054A27",
+            },
+          }}
+          variant="outlined"
+        >
+          <InputLabel
+            sx={{
+              "& label": {
+                color: "#054A27 !important",
+              },
+            }}
+            htmlFor="outlined-adornment-password"
+          >
             رمز عبور
           </InputLabel>
           <OutlinedInput
@@ -332,6 +338,19 @@ export default function RegisterPassword({
             onChange={(e) => setPassword(e.target.value)}
             sx={{
               width: "100%",
+              "& fieldset": {
+                borderColor: "#054A27 !important",
+              },
+
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#054A27",
+              },
+              "&.outlinedInputClasses.focused": {
+                borderColor: "#054A27",
+              },
+              "&:hover > .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#054A27",
+              },
             }}
             helperText={`${error.hasError ? error.error : ""}`}
             className="input-phone"
@@ -376,10 +395,7 @@ export default function RegisterPassword({
           >
             {loading ? "صبر کنید..." : "تایید"}
           </Button>
-          <Button
-            className="back-btn"
-            onClick={() => setActive((prev) => prev - 2)}
-          >
+          <Button className="back-btn" onClick={() => setActive((prev) => prev - 2)}>
             بازگشت
           </Button>
         </Box>

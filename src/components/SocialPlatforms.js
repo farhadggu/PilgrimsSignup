@@ -168,16 +168,16 @@ export default function SocialPlatforms({
               },
               "& .MuiInputLabel-root": {
                 "&.Mui-focused": {
-                  color: "#b83290",
+                  color: "#054A27",
                 },
               },
               "& .MuiOutlinedInput-root": {
                 fieldset: {},
                 "&:hover fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
               },
             }}
@@ -217,16 +217,16 @@ export default function SocialPlatforms({
               },
               "& .MuiInputLabel-root": {
                 "&.Mui-focused": {
-                  color: "#b83290",
+                  color: "#054A27",
                 },
               },
               "& .MuiOutlinedInput-root": {
                 fieldset: {},
                 "&:hover fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
               },
             }}

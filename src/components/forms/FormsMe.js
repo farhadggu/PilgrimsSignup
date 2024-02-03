@@ -14,6 +14,10 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Forms.css";
+import { useState } from "react";
+import MobileDate from "../../utils/MobileDate";
+import moment from "moment-jalaali";
+import DesktopDate from "../../utils/DesktopDate";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,7 +43,8 @@ export default function FormsMe({
   loading,
   setActiveStep,
 }) {
-  console.log(data);
+  const [open, setOpen] = useState(false);
+  const [toggleLable, setToggleLabel] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -69,10 +74,10 @@ export default function FormsMe({
           component="form"
           onSubmit={submitHandler}
         >
-          <p style={{ textAlign: 'start', width: "100%" }}>
-          فقط برای اولین بار نیاز به پر کردن اطلاعات این فرم دارید و از دفعات
-          بعد کافی است پاسخ صحیح انتخاب کنید.
-        </p>
+          <p style={{ textAlign: "start", width: "100%" }}>
+            فقط برای اولین بار نیاز به پر کردن اطلاعات این فرم دارید و از دفعات بعد کافی است پاسخ
+            صحیح انتخاب کنید.
+          </p>
           <Grid item md={3.9} sm={6} xs={12}>
             <TextField
               required
@@ -83,9 +88,7 @@ export default function FormsMe({
               value={data.name}
               onChange={handleChange}
               className="input-phone"
-              helperText={`${
-                error.nameError === "name" && error.hasError ? error.error : ""
-              }`}
+              helperText={`${error.nameError === "name" && error.hasError ? error.error : ""}`}
               sx={{
                 width: "100%",
                 "& .MuiInputBase-input": {
@@ -93,16 +96,16 @@ export default function FormsMe({
                 },
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "#b83290",
+                    color: "#054A27",
                   },
                 },
                 "& .MuiOutlinedInput-root": {
                   fieldset: {},
                   "&:hover fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                 },
               }}
@@ -119,11 +122,7 @@ export default function FormsMe({
               value={data.lastname}
               onChange={handleChange}
               className="input-phone"
-              helperText={`${
-                error.nameError === "lastname" && error.hasError
-                  ? error.error
-                  : ""
-              }`}
+              helperText={`${error.nameError === "lastname" && error.hasError ? error.error : ""}`}
               sx={{
                 width: "100%",
                 "& .MuiInputBase-input": {
@@ -131,16 +130,16 @@ export default function FormsMe({
                 },
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "#b83290",
+                    color: "#054A27",
                   },
                 },
                 "& .MuiOutlinedInput-root": {
                   fieldset: {},
                   "&:hover fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                 },
               }}
@@ -159,9 +158,7 @@ export default function FormsMe({
               onChange={handleChange}
               className="input-phone"
               helperText={`${
-                error.nameError === "other_phone" && error.hasError
-                  ? error.error
-                  : ""
+                error.nameError === "other_phone" && error.hasError ? error.error : ""
               }`}
               sx={{ width: "100%" }}
             />
@@ -178,9 +175,7 @@ export default function FormsMe({
               onChange={handleChange}
               className="input-phone"
               helperText={`${
-                error.nameError === "other_phone" && error.hasError
-                  ? error.error
-                  : ""
+                error.nameError === "other_phone" && error.hasError ? error.error : ""
               }`}
               sx={{
                 width: "100%",
@@ -189,23 +184,41 @@ export default function FormsMe({
                 },
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "#b83290",
+                    color: "#054A27",
                   },
                 },
                 "& .MuiOutlinedInput-root": {
                   fieldset: {},
                   "&:hover fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                 },
               }}
             />
           </Grid>
 
-          <Grid item md={8} sm={0} xs={0}></Grid>
+          <Grid item md={3.9} sm={12} xs={12}>
+            <div
+              className="dateInput"
+              onClick={() => {
+                setOpen(true);
+                setToggleLabel(true);
+              }}
+            >
+              <p
+                style={{
+                  transform: toggleLable ? "translateY(-20px)" : "translateY(4px)",
+                  fontSize: toggleLable ? "13px" : "15px",
+                }}
+              >
+                تاریخ تولد*
+              </p>
+              <p>{moment(data.birthday, "YYYY-MM-DD HH:mm:ss").format("YYYY/M/D")}</p>
+            </div>
+          </Grid>
 
           <Grid item md={3.9} sm={6} xs={12}>
             <FormLabel id="demo-row-radio-buttons-group-label">جنسیت</FormLabel>
@@ -224,7 +237,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -239,7 +252,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -250,9 +263,7 @@ export default function FormsMe({
           </Grid>
 
           <Grid item md={3.9} sm={6} xs={12}>
-            <FormLabel id="demo-row-radio-buttons-group-label">
-              پاسپورت
-            </FormLabel>
+            <FormLabel id="demo-row-radio-buttons-group-label">پاسپورت</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
@@ -267,7 +278,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -282,7 +293,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -310,7 +321,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -325,7 +336,7 @@ export default function FormsMe({
                   <Radio
                     sx={{
                       "&.Mui-checked": {
-                        color: "#b83290",
+                        color: "#054A27",
                       },
                     }}
                   />
@@ -344,16 +355,16 @@ export default function FormsMe({
                 },
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "#b83290",
+                    color: "#054A27",
                   },
                 },
                 "& .MuiOutlinedInput-root": {
                   fieldset: {},
                   "&:hover fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                 },
               }}
@@ -365,9 +376,7 @@ export default function FormsMe({
                 value={data.province_id}
                 label="استان"
                 name="province_id"
-                onChange={(e) =>
-                  setData({ ...data, [e.target.name]: e.target.value })
-                }
+                onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
                 MenuProps={MenuProps}
               >
                 {province?.map((item, index) => (
@@ -391,16 +400,16 @@ export default function FormsMe({
               },
               "& .MuiInputLabel-root": {
                 "&.Mui-focused": {
-                  color: "#b83290",
+                  color: "#054A27",
                 },
               },
               "& .MuiOutlinedInput-root": {
                 fieldset: {},
                 "&:hover fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
               },
             }}
@@ -413,9 +422,7 @@ export default function FormsMe({
                 value={data.city_id}
                 name="city_id"
                 label="شهر"
-                onChange={(e) =>
-                  setData({ ...data, [e.target.name]: e.target.value })
-                }
+                onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
                 MenuProps={MenuProps}
               >
                 {allCity?.map((item, index) => (
@@ -439,16 +446,16 @@ export default function FormsMe({
               },
               "& .MuiInputLabel-root": {
                 "&.Mui-focused": {
-                  color: "#b83290",
+                  color: "#054A27",
                 },
               },
               "& .MuiOutlinedInput-root": {
                 fieldset: {},
                 "&:hover fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#b83290",
+                  borderColor: "#054A27",
                 },
               },
             }}
@@ -488,16 +495,16 @@ export default function FormsMe({
                 },
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "#b83290",
+                    color: "#054A27",
                   },
                 },
                 "& .MuiOutlinedInput-root": {
                   fieldset: {},
                   "&:hover fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#b83290",
+                    borderColor: "#054A27",
                   },
                 },
               }}
@@ -509,9 +516,7 @@ export default function FormsMe({
                 value={data.origin_location}
                 name="origin_location"
                 label="انتخاب مبدا"
-                onChange={(e) =>
-                  setData({ ...data, [e.target.name]: e.target.value })
-                }
+                onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
                 MenuProps={MenuProps}
               >
                 <MenuItem value={"تهران"}>تهران</MenuItem>
@@ -611,7 +616,7 @@ export default function FormsMe({
             }}
             variant="contained"
             sx={{
-              background: "#b83290",
+              background: "#054A27",
               padding: "10px 30px",
               margin: "20px auto",
             }}
@@ -636,7 +641,7 @@ export default function FormsMe({
             }}
             variant="contained"
             sx={{
-              background: "#b83290",
+              background: "#054A27",
               padding: "10px 30px 0 10px",
               margin: "20px auto",
             }}
@@ -644,6 +649,21 @@ export default function FormsMe({
             بازگشت
           </Button>
         </Grid>
+        {window.innerWidth > 768 ? (
+          <DesktopDate
+            open={open}
+            setOpen={setOpen}
+            setData={setData}
+            setToggleLabel={setToggleLabel}
+          />
+        ) : (
+          <MobileDate
+            open={open}
+            setOpen={setOpen}
+            setData={setData}
+            setToggleLabel={setToggleLabel}
+          />
+        )}
       </Box>
     </>
   );

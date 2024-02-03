@@ -108,6 +108,10 @@ button:disabled {
   margin: 0 !important;
 }
 
+/* .muirtl-1sdnp8e-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: #054A27 !important;
+} */
+
 @-webkit-keyframes shine {
   to {
     background-position-x: -200%;

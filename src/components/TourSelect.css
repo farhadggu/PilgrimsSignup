@@ -12,7 +12,7 @@
 
 .for-me:hover{
   background-color: #fff;
-  color: #b83290;
+  color: #054A27;
 }
 
 .for-others{
@@ -28,11 +28,11 @@
 
 .for-others:hover{
   background-color: #fff;
-  color: #b83290;
+  color: #054A27;
 }
 
 .active{
-  background-color: #b83290;
+  background-color: #054A27;
   color: #fff;
-  border: 1px solid #b83290;
+  border: 1px solid #054A27;
 }
