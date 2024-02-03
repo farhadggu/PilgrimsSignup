@@ -50,9 +50,7 @@ export const validateInput = ({ name, value }) => {
         error = "شماره تلفن وارد کنید";
         nameError = "phone";
       } else if (
-        !/^(0[0-9]{11,11}|(\+98|0098|98|0)?9\d{9})$/.test(
-          p2e(value)
-        )
+        !/^(0[0-9]{10,10}|(\+98|0098|98)?9\d{9})$/.test(p2e(value))
       ) {
         hasError = true;
         error = "فرمت شماره تلفن وارد شده نا معتبر می باشد";
