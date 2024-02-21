@@ -43,6 +43,7 @@ export default function AcceptRulesData({
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   let base64Images = [];
+  console.log(data.phone);
 
   useEffect(() => {
     allProvinceCityData.filter((items) => {
@@ -56,7 +57,7 @@ export default function AcceptRulesData({
       }
     });
   }, [data.city_id, data.province_id, allProvinceCityData]);
-
+  const p2e = (s) => s.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -91,98 +92,120 @@ export default function AcceptRulesData({
     setTimeout(() => {
       updateOrInsert
         ? axios
-          .post(
-            `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
-            {
-              question_id: question.id,
-              answer: question.final_answer === answer ? 1 : 0,
-              user_answer: answer === "answer_1" ? 1 : answer === "answer_2" ? 2 : answer === "answer_3" ? 3 : answer === "answer_4" ? 4 : ""
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-                Accept: "application/json",
+            .post(
+              `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
+              {
+                question_id: question.id,
+                answer: question.final_answer === answer ? 1 : 0,
+                user_answer:
+                  answer === "answer_1"
+                    ? 1
+                    : answer === "answer_2"
+                    ? 2
+                    : answer === "answer_3"
+                    ? 3
+                    : answer === "answer_4"
+                    ? 4
+                    : "",
               },
-            }
-          )
-          .then(async (resp) => {
-            setDisableAnswer(true);
-            await axios
-              .put(
-                `${process.env.REACT_APP_BASEURL}/api/v1/toor/${idUpdate}`,
-                data,
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                  },
-                }
-              )
-              .then(async (resp) => {
-                toast.success(resp.data.message);
-                setLoading(false);
-                setIsLoading(false);
-                setActive((prev) => prev + 1);
-                setActiveStep((prev) => prev + 1);
-              })
-              .catch((error) => {
-                setLoading(false);
-                setIsLoading(false);
-                console.log(error);
-                toast.error(error.response.data.message);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-            setLoading(false);
-            setIsLoading(false);
-          })
-        : axios
-          .post(
-            `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
-            {
-              question_id: question.id,
-              answer: question.final_answer === answer ? 1 : 0,
-              user_answer: answer === "answer_1" ? 1 : answer === "answer_2" ? 2 : answer === "answer_3" ? 3 : answer === "answer_4" ? 4 : ""
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-            }
-          )
-          .then(async (resp) => {
-            setDisableAnswer(true);
-            await axios
-              .post(`${process.env.REACT_APP_BASEURL}/api/v1/toor`, data, {
+              {
                 headers: {
                   Authorization: `Bearer ${token}`,
                   "Content-Type": "application/json",
                   Accept: "application/json",
                 },
-              })
-              .then(async (resp) => {
-                toast.success(resp.data.message);
-                setActive((prev) => prev + 1);
-                setActiveStep((prev) => prev + 1);
-                setLoading(false);
-                setIsLoading(false);
-              })
-              .catch((error) => {
-                setLoading(false);
-                setIsLoading(false);
-                console.log(error);
-                toast.error(error.response.data.message);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-            setIsLoading(false);
-          });
+              }
+            )
+            .then(async (resp) => {
+              setDisableAnswer(true);
+              await axios
+                .put(
+                  `${process.env.REACT_APP_BASEURL}/api/v1/toor/${idUpdate}`,
+                  { ...data, phone: p2e(data.phone) },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then(async (resp) => {
+                  toast.success(resp.data.message);
+                  setLoading(false);
+                  setIsLoading(false);
+                  setActive((prev) => prev + 1);
+                  setActiveStep((prev) => prev + 1);
+                })
+                .catch((error) => {
+                  setLoading(false);
+                  setIsLoading(false);
+                  console.log(error);
+                  toast.error(error.response.data.message);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+              setLoading(false);
+              setIsLoading(false);
+            })
+        : axios
+            .post(
+              `${process.env.REACT_APP_BASEURL}/api/v1/question-answer`,
+              {
+                question_id: question.id,
+                answer: question.final_answer === answer ? 1 : 0,
+                user_answer:
+                  answer === "answer_1"
+                    ? 1
+                    : answer === "answer_2"
+                    ? 2
+                    : answer === "answer_3"
+                    ? 3
+                    : answer === "answer_4"
+                    ? 4
+                    : "",
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+              }
+            )
+            .then(async (resp) => {
+              setDisableAnswer(true);
+              await axios
+                .post(
+                  `${process.env.REACT_APP_BASEURL}/api/v1/toor`,
+                  { ...data, phone: p2e(data.phone) },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then(async (resp) => {
+                  toast.success(resp.data.message);
+                  setActive((prev) => prev + 1);
+                  setActiveStep((prev) => prev + 1);
+                  setLoading(false);
+                  setIsLoading(false);
+                })
+                .catch((error) => {
+                  setLoading(false);
+                  setIsLoading(false);
+                  console.log(error);
+                  toast.error(error.response.data.message);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+              setIsLoading(false);
+            });
     }, 1000);
   };
 
@@ -196,26 +219,24 @@ export default function AcceptRulesData({
         <ul style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <li>
             <Typography textAlign="justify">
-              در صورتی که باتوجه به تحقیقات به عمل آمده محرز شود هرکدام از شرکت
-              کنندگان با اطلاعات غلط و غیر واقعی ثبت نام نموده اند از روند
-              قرعه‌کشی حذف خواهند شد و اگر از برندگان قرعه کشی باشند جایگزین
-              آنها در هفته ی بعد قرعه کشی خواهد شد .
+              در صورتی که باتوجه به تحقیقات به عمل آمده محرز شود هرکدام از شرکت کنندگان با اطلاعات
+              غلط و غیر واقعی ثبت نام نموده اند از روند قرعه‌کشی حذف خواهند شد و اگر از برندگان قرعه
+              کشی باشند جایگزین آنها در هفته ی بعد قرعه کشی خواهد شد .
             </Typography>
           </li>
 
           <li>
             <Typography sx={{ textAlign: "justify !important" }}>
-              حرکت کاروان ها از مبدا تهران و کرج خواهد بود و زائر باید برای
-              عزیمت به عتبات و عالیات در یکی از این دو مبدا حاضر شود .
+              حرکت کاروان ها از مبدا تهران و کرج خواهد بود و زائر باید برای عزیمت به عتبات و عالیات
+              در یکی از این دو مبدا حاضر شود .
             </Typography>
           </li>
 
           <li>
             <Typography textAlign="justify">
-              لطفا در صورتی که گذر نامه (پاسپورت) ندارید و یا از اعتبار گذر نامه
-              ی شما کمتر از شش ماه مانده است از ثبت نام خودداری فرمایید . (مسافر
-              برای عبور از مرز باید گذر نامه ای با اعتبار بیش از شش ماه داشته
-              باشد. )
+              لطفا در صورتی که گذر نامه (پاسپورت) ندارید و یا از اعتبار گذر نامه ی شما کمتر از شش
+              ماه مانده است از ثبت نام خودداری فرمایید . (مسافر برای عبور از مرز باید گذر نامه ای با
+              اعتبار بیش از شش ماه داشته باشد. )
             </Typography>
           </li>
         </ul>
@@ -246,68 +267,29 @@ export default function AcceptRulesData({
             </DialogTitle>
             <DialogContent sx={{ marginTop: "20px", height: "550px" }}>
               <Grid container rowGap={4}>
-                <Grid
-                  md={6}
-                  sm={12}
-                  xs={12}
-                  item
-                  display="flex"
-                  alignItems="center"
-                  gap="10px"
-                >
+                <Grid md={6} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
                   <Typography fontWeight="700"> نام و نام خانوادگی:</Typography>
                   <Typography>
                     {data.other_name} {data.other_lastname}
                   </Typography>
                 </Grid>
 
-                <Grid
-                  md={6}
-                  sm={12}
-                  xs={12}
-                  item
-                  display="flex"
-                  alignItems="center"
-                  gap="10px"
-                >
+                <Grid md={6} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
                   <Typography fontWeight="700"> شماره تماس:</Typography>
                   <Typography>{data.other_phone}</Typography>
                 </Grid>
 
-                <Grid
-                  md={6}
-                  sm={12}
-                  xs={12}
-                  item
-                  display="flex"
-                  alignItems="center"
-                  gap="10px"
-                >
+                <Grid md={6} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
                   <Typography fontWeight="700"> شهر :</Typography>
                   <Typography>{data.other_city}</Typography>
                 </Grid>
 
-                <Grid
-                  md={6}
-                  sm={12}
-                  xs={12}
-                  item
-                  display="flex"
-                  alignItems="center"
-                  gap="10px"
-                >
+                <Grid md={6} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
                   <Typography fontWeight="700"> موقعیت اجتماعی :</Typography>
                   <Typography>{data.other_socialـposition}</Typography>
                 </Grid>
 
-                <Grid
-                  md={6}
-                  sm={12}
-                  item
-                  display="flex"
-                  alignItems="center"
-                  gap="10px"
-                >
+                <Grid md={6} sm={12} item display="flex" alignItems="center" gap="10px">
                   <Typography fontWeight="700"> نسبت:</Typography>
                   <Typography>{data.other_relationship}</Typography>
                 </Grid>
@@ -327,84 +309,36 @@ export default function AcceptRulesData({
         </DialogTitle>
         <DialogContent sx={{ marginTop: "20px" }}>
           <Grid container rowGap={4}>
-            <Grid
-              md={6}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={6} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">نام و نام خانوادگی:</Typography>
               <Typography>
                 {data.name} {data.lastname}
               </Typography>
             </Grid>
 
-            <Grid
-              md={6}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={6} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">جنسیت:</Typography>
               <Typography>{data.gender}</Typography>
             </Grid>
 
-            <Grid
-              md={6}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={6} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">تلفن همراه:</Typography>
               <Typography>{data.phone}</Typography>
             </Grid>
 
             {data.passengers_count != 0 && (
-              <Grid
-                md={6}
-                sm={6}
-                xs={12}
-                item
-                display="flex"
-                alignItems="center"
-                gap="10px"
-              >
+              <Grid md={6} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
                 {/* <Typography fontWeight="700">نسبت نفرات همراه:</Typography> */}
                 <Typography>{data.passengers_relationship}</Typography>
               </Grid>
             )}
 
-            <Grid
-              md={6}
-              sm={12}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={6} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">پاسپورت:</Typography>
               <Typography>{data.passport ? "دارم" : "ندارم"}</Typography>
             </Grid>
 
-            <Grid
-              md={12}
-              sm={12}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={12} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">وضعیت شما:</Typography>
               <Typography>
                 {data.pilgrims
@@ -413,54 +347,22 @@ export default function AcceptRulesData({
               </Typography>
             </Grid>
 
-            <Grid
-              md={4}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={4} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">استان:</Typography>
               <Typography>{province}</Typography>
             </Grid>
 
-            <Grid
-              md={4}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={4} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">شهر:</Typography>
               <Typography>{city}</Typography>
             </Grid>
 
-            <Grid
-              md={4}
-              sm={6}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={4} sm={6} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">روستا:</Typography>
               <Typography>{data.village}</Typography>
             </Grid>
 
-            <Grid
-              md={12}
-              sm={12}
-              xs={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={12} sm={12} xs={12} item display="flex" alignItems="center" gap="10px">
               <Typography fontWeight="700">مبدا انتخاب شده:</Typography>
               <Typography>{data.origin_location}</Typography>
             </Grid>
@@ -493,14 +395,7 @@ export default function AcceptRulesData({
               )}
             </Grid> */}
 
-            <Grid
-              md={12}
-              sm={12}
-              item
-              display="flex"
-              alignItems="center"
-              gap="10px"
-            >
+            <Grid md={12} sm={12} item display="flex" alignItems="center" gap="10px">
               <Typography component={"span"} fontWeight="700">
                 توضیحات:
               </Typography>
