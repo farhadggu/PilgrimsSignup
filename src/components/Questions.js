@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import "./Questions.css";
 
 export default function Questions({
@@ -19,7 +13,7 @@ export default function Questions({
   setAnswer,
   answer,
   disableAnswer,
-  setDisableAnswer
+  setDisableAnswer,
 }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -82,14 +76,21 @@ export default function Questions({
   if (canSignUp) {
     return (
       <div className="questionsPage">
-        <h3 className="questionsHeading">برای شرکت در قرعه کشی باید به سوال زیر پاسخ صحیح بدهید.</h3>
+        <h3 className="questionsHeading">
+          برای شرکت در قرعه کشی باید به سوال زیر پاسخ صحیح بدهید.
+        </h3>
         <div className="questionsPageContainer">
           {loadingPage ? (
             <>
               <div className="content" style={{ width: "100%" }}></div>
             </>
           ) : (
-            <FormControl sx={{ "& .MuiButtonBase-root span": {color: "#054a27 !important"}, "& label": {color: "#054a27 !important"} }}>
+            <FormControl
+              sx={{
+                "& .MuiButtonBase-root span": { color: "#054a27 !important" },
+                "& label": { color: "#054a27 !important" },
+              }}
+            >
               <FormLabel sx={{ marginBottom: "20px" }} id="demo-radio-buttons-group-label">
                 {question.question}
               </FormLabel>
@@ -169,9 +170,8 @@ export default function Questions({
     return (
       <div className="questionsPage">
         <p>
-          شرکت کننده عزیز سلام شما با این شماره تلفن سوال این هفته قرعه‌کشی را
-         پاسخ داده اید و تا سوال آینده قرعه کشی شرایط شرکت در قرعه‌کشی را
-          ندارید .
+          شرکت کننده گرامی سلام ، شما با این شماره تلفن سوال قرعه کشی این هفته را پاسخ داده اید و تا
+          سوال قرعه کشی هفته آینده امکان شرکت در قرعه کشی را ندارید.
         </p>
       </div>
     );
