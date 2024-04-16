@@ -42,6 +42,7 @@ export default function HomePage() {
   const [question, setQuestion] = useState([]);
   const [answer, setAnswer] = useState([]);
   const [disableAnswer, setDisableAnswer] = useState(false);
+  const [panelStatus, setPanelStatus] = useState(false);
 
   const [data, setData] = useState({
     phone: "",
@@ -113,9 +114,6 @@ export default function HomePage() {
       searchCity();
     }
   }, [data.province_id, active]);
-
-  console.log(active);
-  console.log(social);
 
   const componentLists = [
     <Welcome setActive={setActive} />,
@@ -293,15 +291,34 @@ export default function HomePage() {
       });
   };
 
+  const getData = async () => {
+    await fetch(`${process.env.REACT_APP_BASEURL}/api/v1/setting`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        const { data } = await res.json();
+        setPanelStatus(
+          data.find((el) => el.setting_key === "STATUS").setting_value === "true" ? true : false
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getLottryDate();
+    getData();
   }, []);
 
   return (
     <Container maxWidth="lg" className="home-box">
       <img src={karbala} alt="karbala" />
       <Box className="welcome-box" style={{ width: "calc(100% - 100px)" }}>
-        {lotteryDay ? (
+        {lotteryDay || !panelStatus ? (
           <div className="welcome-page">
             <h4 style={{ textAlign: "center" }}>
               در حال حاضر امکان ثبت نام وجود ندارد لطفا در روز ها آتی مراجعه نمایید .
